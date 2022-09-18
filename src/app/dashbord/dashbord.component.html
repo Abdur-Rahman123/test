@@ -1,15 +1,22 @@
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
     <div class="side col-md-4">
-     <a class="btn btn-success m-3 custome btn-color">create Employee</a>
-     <a class="btn btn-success m-3 custome btn-color"> List Employee</a>
+     <a (click)="createEmployee()" class="btn btn-success m-3 custome btn-color">create Employee</a>
+     <a (click)="showEmployee()" class="btn btn-success m-3 custome btn-color"> List Employee</a>
 
     </div>
 </div>
-    <div class="col-md-8">
-        <app-employee-form></app-employee-form>
+    <div *ngIf="showTable" class="col-md-8 mt-4">
+        
+        <app-employee-list></app-employee-list>
     </div>
+    <div *ngIf="!showTable" class="col-md-8 mt-4 margin-left">
+       
+            <app-employee-form></app-employee-form>
+        
+    </div>
+   
   </div>
    
 

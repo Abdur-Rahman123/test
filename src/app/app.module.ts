@@ -13,13 +13,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DashbordComponent,
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatToolbarModule,
     MatSelectModule,
     MatButtonModule,
+    MatTableModule,
+    MatIconModule,
     BrowserAnimationsModule
   ],
   providers: [],

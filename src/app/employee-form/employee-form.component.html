@@ -1,0 +1,71 @@
+
+  
+  <div class="container"> 
+    <form [formGroup]="formValue"  class="example-form">
+        <div>
+            <mat-form-field class="form-element mt-3">
+              <input matInput placeholder="firstName" formControlName="firstName">
+              <mat-error *ngIf="!formValue.controls['firstName'].valid && formValue.controls['firstName'].touched">
+               first Name is Required
+              </mat-error>
+            </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="form-element  mt-3">
+                  <input matInput placeholder="lastName" formControlName="lastName">
+                  <mat-error *ngIf="!formValue.controls['lastName'].valid && formValue.controls['lastName'].touched">
+                      last Name is Required
+                  </mat-error>
+                </mat-form-field>
+            
+              </div>
+  
+        <div>
+      <mat-form-field class="form-element mt-3">
+        <input matInput placeholder="Emailaddress" formControlName="email">
+        <mat-error *ngIf="formValue.controls['email'].errors?.['required'] && formValue.controls['email'].touched">
+         Email is Required
+        </mat-error>
+        <mat-error *ngIf="formValue.controls['email'].errors?.['email']">
+            Enter Valid Email Address
+           </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="form-element mt-3">
+          <input matInput placeholder="Phone" formControlName="phone">
+          <mat-error *ngIf="formValue.controls['phone'].errors?.['required'] && formValue.controls['phone'].touched">
+           Phone is Required
+          </mat-error>
+          <mat-error *ngIf="formValue.controls['phone'].errors?.['minlength'] && !formValue.controls['phone'].errors?.['required']">
+              Phone must be minimum 6 Numbere
+             </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="form-element mt-3" appearance="fill">
+          <mat-label>profession</mat-label>
+          <mat-select matNativeControl name="profession" formControlName="profession">
+              <mat-option value="Programmer">Programmer</mat-option>
+              <mat-option value="Teacher">Teacher</mat-option>
+              <mat-option value="Student">Student</mat-option>
+              <mat-option value="Farmer">Farmer</mat-option>
+              <mat-option value="Others">Others</mat-option>
+          </mat-select>
+          <mat-error *ngIf="formValue.controls['profession'].errors?.['required'] && formValue.controls['profession'].touched">
+            profession is Required
+           </mat-error>
+      </mat-form-field>
+      </div>
+    
+     
+  
+      <div class="form-element mt-3">
+        <button (click)="onSubmit()" mat-raised-button color="primary" type="submit" class="button" [disabled]="!formValue.valid">Submit Form</button>
+      </div>
+  
+    </form>
+  </div>

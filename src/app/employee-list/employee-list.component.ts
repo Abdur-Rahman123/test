@@ -28,6 +28,7 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator:any= MatPaginator;
 
+  isEditClicked:boolean=false;
 
   ngOnInit(): void {
     let increment=1;
@@ -43,6 +44,7 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
     console.log('value',this.employess)
   }
   edit(id:number){
+    this.isEditClicked=true;
     console.log('id',id);
     this.update=this.employess.find((e:Employee)=>e.id==id);
     this.openDialog();
@@ -58,6 +60,14 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
       
       window.location.reload();
     });
+  }
+
+  details(id:any){
+    if(!this.isEditClicked){
+    console.log('id0',id);
+    this.router.navigate(['details/'+id])
+    }
+    
   }
 
 }

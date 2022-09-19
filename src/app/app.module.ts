@@ -18,6 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DialogComponent } from './dialog/dialog.component';
     DashbordComponent,
     EmployeeFormComponent,
     EmployeeListComponent,
-    DialogComponent
+    DialogComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     BrowserModule,

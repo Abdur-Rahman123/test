@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Employee } from '../model/Employee';
 
 @Component({
   selector: 'app-employee-form',
@@ -11,7 +13,8 @@ export class EmployeeFormComponent implements OnInit {
   formValue!: FormGroup;
   
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.formValue=this.formBuilder.group({
@@ -27,14 +30,15 @@ export class EmployeeFormComponent implements OnInit {
 
   onSubmit(){
     if(this.formValue.invalid) return;
-    var tempArray=[];
+    var tempArray:Employee[]=[];
     let value=JSON.parse(localStorage.getItem('dataSource') || '{}');
     if(Object.keys(value).length!=0){
-      tempArray.push(JSON.parse(localStorage.getItem('dataSource') || '{}'));
+    tempArray=[...value];
     }
     tempArray.push(this.formValue.value);
     localStorage.setItem('dataSource',JSON.stringify(tempArray));
     console.log('localStore value',JSON.parse(localStorage.getItem('dataSource') || '{}'));
+    window.location.reload();
     
   }
   

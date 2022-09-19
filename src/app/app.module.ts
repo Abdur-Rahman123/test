@@ -16,6 +16,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {MatIconModule} from '@angular/material/icon';
     HeaderComponent,
     DashbordComponent,
     EmployeeFormComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatTableModule,
     MatIconModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ],
   providers: [],

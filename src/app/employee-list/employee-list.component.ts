@@ -70,5 +70,17 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
     
   }
 
+  applyFilter(event: Event) {
+   let value=(<HTMLInputElement>event.target).value;
+   
+   if(value.length>2){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+   }
+   if(value.length===0){
+    this.dataSource = new MatTableDataSource<Employee[]>(this.employess);
+   }
+}
+
 }
 

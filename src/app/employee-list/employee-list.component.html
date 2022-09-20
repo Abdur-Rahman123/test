@@ -1,4 +1,9 @@
 <div class="mat-elevation-z8">
+  
+ <mat-form-field class="matInputLeft" appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+</mat-form-field>
     <table mat-table [dataSource]="dataSource">
   
       <!-- Name Column -->

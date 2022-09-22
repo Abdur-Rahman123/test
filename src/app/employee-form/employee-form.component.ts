@@ -1,3 +1,5 @@
+
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,14 +16,16 @@ export class EmployeeFormComponent implements OnInit {
   
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.formValue=this.formBuilder.group({
       firstName:['',Validators.required],
       lastName:['',Validators.required],
-      phone:['',[Validators.required,Validators.minLength(6)]],
+      phone:['',[Validators.required,Validators.pattern(/(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/)]],
       email:['',[Validators.required,Validators.email]],
+      DOB:['',[Validators.required]],
       profession:['',[Validators.required]]
       
     })
@@ -29,7 +33,13 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit(){
+    this.formValue.markAllAsTouched();
     if(this.formValue.invalid) return;
+    let date=this.formValue.controls["DOB"].value;
+    const filterValue:any= this.datePipe.transform(date,'dd/MM/yyyy');
+    this.formValue.controls["DOB"].setValue(filterValue);
+    console.log(this.formValue.value);
+    
     var tempArray:Employee[]=[];
     let value=JSON.parse(localStorage.getItem('dataSource') || '{}');
     if(Object.keys(value).length!=0){

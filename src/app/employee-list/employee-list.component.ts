@@ -1,10 +1,13 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from '../model/Employee';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Router } from '@angular/router';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import * as moment from 'moment'
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,22 +16,27 @@ import { Router } from '@angular/router';
 })
 export class EmployeeListComponent implements OnInit, AfterViewInit {
 
+  @Output()
+dateChange: EventEmitter<MatDatepickerInputEvent<any>> = new EventEmitter();
+
   update!:Employee;
 
   constructor(public dialog: MatDialog,
-    private router: Router){
+    private router: Router,
+    private datePipe: DatePipe){
 
   }
 
 
   employess:Employee[] | any=JSON.parse(localStorage.getItem('dataSource')|| '{}');
 
-  displayedColumns: string[] = ['FullName', 'Email', 'Phone', 'Profession','edit'];
+  displayedColumns: string[] = ['FullName', 'Email', 'Phone', 'DOB',  'Profession','edit'];
   dataSource = new MatTableDataSource<Employee[]>(this.employess);
 
   @ViewChild(MatPaginator) paginator:any= MatPaginator;
 
   isEditClicked:boolean=false;
+  dateModel!:any;
 
   ngOnInit(): void {
     let increment=1;
@@ -52,7 +60,7 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
+      width: '400px',
       data:this.update
     });
 
@@ -81,6 +89,18 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource<Employee[]>(this.employess);
    }
 }
+applyDateFilter(event: MatDatepickerInputEvent<Date>):void{
+  //const filterValue = moment(event.value).format('dd/MM/yyyy');
+  const filterValue:any= this.datePipe.transform(event.value,'dd/MM/yyyy');
+  console.log('filete ',filterValue);
+  
+    //this.dataSource.data = this.dataSource.data.filter(e=> e?.DOB==filterValue);
+    this.dataSource.filter=filterValue;
+    console.log('datasource',this.dataSource.data);
+    
+    
+}
 
 }
+
 
